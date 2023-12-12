@@ -12,7 +12,7 @@ pygame.init()
 ball = Ball(WHIDTH / 2, HEIGHT / 2, 50, 5, 3 / 4)
 
 size_x = 50
-size_y = 100
+size_y = 10
 
 x = -500
 y = HEIGHT / 2
@@ -49,7 +49,7 @@ with (tqdm() as pbar):
         screen.blit(platform_right.image, platform_right.rect)
 
         pygame.display.flip()
-        CLOCK.tick(60)
+        CLOCK.tick(5)
         pbar.update(1)
 pygame.quit()
 sys.exit()
