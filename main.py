@@ -12,13 +12,13 @@ pygame.init()
 ball = Ball(WHIDTH / 2, HEIGHT / 2, 50, 5, 3 / 4)
 
 size_x = 50
-size_y = HEIGHT
+size_y = 100
 
-x = 50
+x = -500
 y = HEIGHT / 2
 
 platform_left = Platform(x, y, size_x, size_y, pygame.K_w, pygame.K_s)
-platform_right = Platform(WHIDTH - 2 * x, y, size_x, size_y, pygame.K_UP, pygame.K_DOWN)
+platform_right = Platform(WHIDTH - x - size_x, y, size_x, size_y, pygame.K_UP, pygame.K_DOWN)
 
 screen = pygame.display.set_mode((WHIDTH, HEIGHT))
 
