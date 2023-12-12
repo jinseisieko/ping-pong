@@ -4,11 +4,12 @@ import pygame.sprite
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, x, y, startv, an) -> None:
+    def __init__(self, x, y, size, startv, an) -> None:
         super().__init__()
 
-        self.image = pygame.Surface((10, 10))
-        pygame.draw.circle(self.image, (255, 255, 255), (5, 5), 5)
+        self.size = size
+        self.image = pygame.Surface((size, size))
+        pygame.draw.circle(self.image, (255, 255, 255), (size / 2, size / 2), size / 2)
         self.rect = self.image.get_rect()
 
         self.x, self.y = x, y
@@ -20,13 +21,14 @@ class Ball(pygame.sprite.Sprite):
         self.vy = 0.
 
     def collision_pl(self, pl):
-        if pl.rect.collidrect(self.rect):
+        if pl.rect.colliderect(self.rect):
             self.an = -(self.an + math.pi)
+            self.v += 1
 
     def collision_box(self, h):
         if self.y <= 0:
             self.an = 2 * math.pi - self.an
-        if self.y >= h - 10:
+        if self.y >= h - self.size:
             self.an = 2 * math.pi - self.an
 
     def update(self):

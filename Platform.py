@@ -1,5 +1,3 @@
-import pygame
-
 from Consts import *
 
 
@@ -11,18 +9,20 @@ class Platform:
         self.size_y = size_y
         self.key_up = key_up
         self.key_down = key_down
-        self.dy = 1
+        self.dy = 10
         self.image = pygame.Surface((size_x, size_y))
+        self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
 
-    def move(self, key):
-        if key == self.key_up:
-            self.y += self.dy
-        if key == self.key_down:
+    def move(self, keys):
+        if keys[self.key_up]:
+            self.y -= self.dy
+        if keys[self.key_down]:
             self.y += self.dy
 
-    def update(self):
-        self.x = max(0 + self.size_x, min(WHIDTH - self.size_x, self.x))
-        self.y = max(0 + self.size_y, min(HEIGHT - self.size_y, self.y))
-        self.rect.x = self.x - self.size_x // 2
-        self.rect.y = self.y - self.size_y // 2
+    def update(self, keys):
+        self.move(keys)
+        self.x = max(0, min(WHIDTH - self.size_x, self.x))
+        self.y = max(0, min(HEIGHT - self.size_y, self.y))
+        self.rect.x = self.x
+        self.rect.y = self.y

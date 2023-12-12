@@ -1,22 +1,26 @@
 """pygame main loop"""
 import sys
 
-import pygame
 from tqdm import tqdm
+
+from Ball import Ball
+from Consts import *
+from Platform import Platform
 
 pygame.init()
 
+ball = Ball(WHIDTH / 2, HEIGHT / 2, 50, 5, 3 / 4)
 
+size_x = 50
+size_y = HEIGHT
 
-ball = Ball(x, y, ds, dy, angle)
-
-size_x = 10
-size_y = 100
-
-x = 10
+x = 50
+y = HEIGHT / 2
 
 platform_left = Platform(x, y, size_x, size_y, pygame.K_w, pygame.K_s)
-platform_right = Platform(x, y, size_x, size_y, pygame.K_UP, pygame.K_DOWN)
+platform_right = Platform(WHIDTH - 2 * x, y, size_x, size_y, pygame.K_UP, pygame.K_DOWN)
+
+screen = pygame.display.set_mode((WHIDTH, HEIGHT))
 
 running = True
 with (tqdm() as pbar):
@@ -28,12 +32,24 @@ with (tqdm() as pbar):
                 running = False
                 quit()
 
-            if event.type == pygame.KEYDOWN:
-                platform_left.move(pygame.key.get_pressed())
-                platform_right.move(pygame.key.get_pressed())
+        screen.fill(0)
 
+        keys = pygame.key.get_pressed()
+        platform_left.update(keys)
+        platform_right.update(keys)
+        ball.update()
 
+        ball.collision_pl(platform_left)
+        ball.collision_pl(platform_right)
 
+        ball.collision_box(HEIGHT)
+
+        screen.blit(ball.image, ball.rect)
+        screen.blit(platform_left.image, platform_left.rect)
+        screen.blit(platform_right.image, platform_right.rect)
+
+        pygame.display.flip()
+        CLOCK.tick(60)
         pbar.update(1)
 pygame.quit()
 sys.exit()
