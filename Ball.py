@@ -1,6 +1,7 @@
 import math
 
 import pygame.sprite
+from Consts import *
 
 
 class Ball(pygame.sprite.Sprite):
@@ -34,9 +35,9 @@ class Ball(pygame.sprite.Sprite):
     def update(self):
         self.vx = self.v * math.cos(self.an)
         self.vy = self.v * math.sin(self.an)
-
-        self.x += self.vx
-        self.y += self.vy
+        if CLOCK.get_fps() != 0:
+            self.x += self.vx * TICKS / (CLOCK.get_fps() + 1e-10)
+            self.y += self.vy * TICKS / (CLOCK.get_fps() + 1e-10)
 
         self.rect.x = round(self.x)
         self.rect.y = round(self.y)
