@@ -11,10 +11,10 @@ pygame.init()
 
 ball = Ball(WHIDTH / 2, HEIGHT / 2, 50, 5, 3 / 4)
 
-size_x = 50
-size_y = HEIGHT
+size_x = 100
+size_y = 100
 
-x = 50
+x = 100-size_x
 y = HEIGHT / 2
 
 platform_left = Platform(x, y, size_x, size_y, pygame.K_w, pygame.K_s)
@@ -33,7 +33,6 @@ with (tqdm() as pbar):
                 quit()
 
         screen.fill(0)
-
         keys = pygame.key.get_pressed()
         platform_left.update(keys)
         platform_right.update(keys)

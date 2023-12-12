@@ -16,9 +16,11 @@ class Platform:
 
     def move(self, keys):
         if keys[self.key_up]:
-            self.y -= self.dy
+            if CLOCK.get_fps() != 0:
+                self.y -= self.dy * TICKS / (CLOCK.get_fps() + 1e-10)
         if keys[self.key_down]:
-            self.y += self.dy
+            if CLOCK.get_fps() != 0:
+                self.y += self.dy * TICKS / (CLOCK.get_fps() + 1e-10)
 
     def update(self, keys):
         self.move(keys)
