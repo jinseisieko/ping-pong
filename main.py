@@ -18,7 +18,7 @@ x = 10
 y = HEIGHT / 2
 
 platform_left = Platform(x, y, size_x, size_y, pygame.K_w, pygame.K_s)
-platform_right = Platform(WHIDTH - 2 * x, y, size_x, size_y, pygame.K_UP, pygame.K_DOWN)
+platform_right = Platform(WHIDTH - x - size_x, y, size_x, size_y, pygame.K_UP, pygame.K_DOWN)
 
 screen = pygame.display.set_mode((WHIDTH, HEIGHT))
 s1, s2 = 0, 0

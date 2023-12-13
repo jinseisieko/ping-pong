@@ -1,6 +1,7 @@
 import math
 
 import pygame.sprite
+
 from Consts import *
 
 
@@ -25,12 +26,15 @@ class Ball(pygame.sprite.Sprite):
         if pl.rect.colliderect(self.rect):
             self.an = -(self.an + math.pi)
             self.v += 1
+            self.update()
 
     def collision_box(self, h):
         if self.y <= 0:
             self.an = 2 * math.pi - self.an
+            self.update()
         if self.y >= h - self.size:
             self.an = 2 * math.pi - self.an
+            self.update()
 
     def update(self):
         self.vx = self.v * math.cos(self.an)
