@@ -26,22 +26,22 @@ class Ball(pygame.sprite.Sprite):
         if pl.rect.colliderect(self.rect):
             self.an = -(self.an + math.pi)
             self.v += 1
-            self.update()
+            self.update(TICKS)
 
     def collision_box(self, h):
         if self.y <= 0:
             self.an = 2 * math.pi - self.an
-            self.update()
+            self.update(TICKS)
         if self.y >= h - self.size:
             self.an = 2 * math.pi - self.an
-            self.update()
+            self.update(TICKS)
 
-    def update(self):
+    def update(self, fps):
         self.vx = self.v * math.cos(self.an)
         self.vy = self.v * math.sin(self.an)
-        if CLOCK.get_fps() != 0:
-            self.x += self.vx * TICKS / (CLOCK.get_fps() + 1e-10)
-            self.y += self.vy * TICKS / (CLOCK.get_fps() + 1e-10)
+        if fps != 0:
+            self.x += self.vx * TICKS / (fps + 1e-10)
+            self.y += self.vy * TICKS / (fps + 1e-10)
 
         self.rect.x = round(self.x)
         self.rect.y = round(self.y)
