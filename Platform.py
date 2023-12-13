@@ -1,8 +1,11 @@
+import pygame.sprite
+
 from Consts import *
 
 
-class Platform:
+class Platform(pygame.sprite.Sprite):
     def __init__(self, x, y, size_x, size_y, key_up, key_down):
+        super().__init__()
         self.x = x
         self.y = y
         self.size_x = size_x
